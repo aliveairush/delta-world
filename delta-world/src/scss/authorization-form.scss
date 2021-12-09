@@ -1,12 +1,12 @@
-@import "../scss-varibales";
+@import "scss-varibales";
 
-.registration-page {
+.auth-page {
   display: flex;
   justify-content: center;
 
 }
 
-.registration-form {
+.auth-form {
   background-color: $primary-bg-color-light;
   border: 2px solid $border-color-light;
   border-radius: 15px;
@@ -43,7 +43,7 @@
     }
   }
 
-  &__login-link {
+  &__help-info {
     font-size: 13px;
     font-weight: lighter;
     margin-top: -5px;
