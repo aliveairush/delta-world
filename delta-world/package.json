@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -39,7 +40,10 @@
     },
     "rules": {
       "react/function-component-definition": "off",
-      "@typescript-eslint/quotes": "off"
+      "@typescript-eslint/quotes": "off",
+      "jsx-a11y/click-events-have-key-events": "off",
+      "jsx-a11y/interactive-supports-focus": "off",
+      "jsx-a11y/no-static-element-interactions": "off"
     }
   },
   "browserslist": {
