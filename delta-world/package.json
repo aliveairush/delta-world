@@ -10,6 +10,7 @@
     "@types/node": "^12.20.37",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
+    "antd": "^4.17.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -37,7 +38,8 @@
       "project": "./tsconfig.json"
     },
     "rules": {
-      "react/function-component-definition": "off"
+      "react/function-component-definition": "off",
+      "@typescript-eslint/quotes": "off"
     }
   },
   "browserslist": {
