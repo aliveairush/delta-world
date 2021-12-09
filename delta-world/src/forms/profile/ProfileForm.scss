@@ -1,0 +1,48 @@
+@import "../../scss/scss-varibales";
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+
+  > :nth-child(1) {
+    min-height: 300px;
+  }
+
+  &__userinfo {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    background-color: $primary-bg-color-light;
+    border: $border-light;
+    border-radius: $border-radius;
+    padding: $padding;
+    margin-top: 20px;
+
+    & img {
+      width: 100%;
+      border-radius: $border-radius;
+      //padding: 20px;
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      padding-left: $padding;
+
+      &__header {
+        display: flex;
+        justify-content: space-between;
+
+        &__username {
+          font-size: 24px;
+          font-weight: bolder;
+        }
+      }
+
+      &__footer {
+        margin-top: auto;
+      }
+    }
+  }
+}
+
+.my-img {}
