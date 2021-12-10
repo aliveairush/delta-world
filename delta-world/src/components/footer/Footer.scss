@@ -1,4 +1,12 @@
+@import "../../scss/scss-varibales";
+
 .footer {
-  border-top: 3px solid #E7E7E7;
+  border-top: $border-light;
+  background: $primary-bg-color-light;
+
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15px;
+  padding-bottom: 20px;
 
 }
