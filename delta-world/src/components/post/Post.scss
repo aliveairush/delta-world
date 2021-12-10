@@ -3,6 +3,7 @@
 .post {
   display: flex;
   flex-direction: column;
+  width: 700px;
 
   &__created-by {
     display: flex;
@@ -62,6 +63,7 @@
     float: left;
     height: 100%;
     margin-right: 10px;
+    padding-bottom: 20px;
 
     & img {
       width: 50px;
