@@ -19,19 +19,7 @@ const App = () => {
   return (
     <div className="App page-layout">
       <Header />
-       {/*<RegistrationForm />*/}
-      {/* <LoginForm /> */}
-      {/* <UsersForm />*/}
-      {/* <PostsForm />*/}
-      {/*<button onClick={() => setShow(true)} type="button">Show modal </button>*/}
-      {/* <Modal show={show} onClose={() => setShow(false)}> */}
-      {/*  <Post /> */}
-      {/* </Modal> */}
-       <ProfileForm />
-      {/*<Modal show={show} onClose={() => setShow(false)}>*/}
-      {/*  <EditProfile />*/}
-      {/*  /!*<Post />*!/*/}
-      {/*</Modal>*/}
+       <RegistrationForm />
       <Footer />
     </div>
   );
