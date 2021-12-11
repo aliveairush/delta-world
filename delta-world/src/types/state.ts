@@ -1,5 +1,12 @@
+import Gender from "./Gender";
+
 export interface IStateRegistration {
-  myTestValue: string
+  name: string,
+  gender: Gender,
+  dateOfBirth: string,
+  email: string,
+  phone: string,
+  error: string,
 }
 
 export interface IStoreRegistration {
