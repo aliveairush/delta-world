@@ -1,0 +1,11 @@
+.field-value {
+
+  > :nth-child(1) {
+    font-weight: bold;
+    font-size: 16px;
+
+    &:after {
+      content: ':\00a0\00a0';
+    }
+  }
+}

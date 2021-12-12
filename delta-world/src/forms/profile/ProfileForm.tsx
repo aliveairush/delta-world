@@ -1,49 +1,104 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './ProfileForm.scss';
-import '../posts/PostsForm.scss';
-import { Pagination } from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import { useParams } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import moment from "moment";
+import * as actions from '../../actions/userProfileActions';
+import { IStoreUserProfile } from "../../types/state";
+import { PostsDataType, UserProfileType } from "../../types/dummyApi";
+import Posts from "../../components/posts/Posts";
+import FieldValue from "../../components/field-value/FieldValue";
+import 'moment/locale/ru';
+import { localeGenderRu } from "../../utils/converters";
+import EditProfileBtn from "../../components/user-profile-components/edit-profile-btn/EditProfileBtn";
 
-const ProfileForm = () => (
-  <main className="profile-form custom-container page-layout__content">
-    <div className="profile-form__userinfo">
-      <div className="profile-form__userinfo__image">
-        <img src="https://thumbs.dreamstime.com/b/wild-gray-tabby-cat-bright-orange-eyes-lies-outdoors-square-photo-instagram-format-194924047.jpg" alt="cat" />
-      </div>
-      <div className="profile-form__userinfo__content">
-        <div className="profile-form__userinfo__content__header">
-          <span className="profile-form__userinfo__content__header__username">Name</span>
-          <div>
-            <EditOutlined />
-            <span>Редактировать</span>
-          </div>
-        </div>
-        <div className="profile-form__userinfo__content__content">
-          <div>INfo</div>
-        </div>
-        <div className="profile-form__userinfo__content__footer">
-          <span>Id :123</span>
-        </div>
-      </div>
-    </div>
-    <div className="posts">
-      <div className="post">
-        <img className="post__img" alt="cats" src="https://static.remove.bg/remove-bg-web/54743c30904cc98f30bb79359718a5ffd69392cd/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg" />
-        <span className="post__desc">Товарищи! рамки и место обучения кадров представляет собой интересный эксперимент проверки позиций, занимаемых участниками в отношении поставленных задач.  </span>
-      </div>
-      <div className="post">
-        <img className="post__img" alt="cats" src="https://static.remove.bg/remove-bg-web/54743c30904cc98f30bb79359718a5ffd69392cd/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg" />
-        <span className="post__desc">Товарищи! рамки и место обучения кадров представляет собой интересный эксперимент проверки позиций, занимаемых участниками в отношении поставленных задач.  </span>
-      </div>
-      <div className="post">
-        <img className="post__img" alt="cats" src="https://static.remove.bg/remove-bg-web/54743c30904cc98f30bb79359718a5ffd69392cd/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg" />
-        <span className="post__desc">Товарищи! рамки и место обучения кадров представляет собой интересный эксперимент проверки позиций, занимаемых участниками в отношении поставленных задач.  </span>
-      </div>
-    </div>
-    <div className="posts-form__pagination">
-      <Pagination defaultCurrent={1} total={50} />
-    </div>
-  </main>
-);
+moment.locale('ru');
 
-export default ProfileForm;
+interface Props {
+  user: UserProfileType,
+  postsData: PostsDataType,
+  loadUserProfileAction: (userId: string) => void
+  loadUserPostsAction: (userId: string, page: number, limit: number) => void
+}
+
+const renderUserImage = (userPicture: string) => (userPicture ? (
+  <div className="profile-userinfo__image">
+    <img
+      src={userPicture}
+      alt="avatar"
+    />
+  </div>
+) : <div />);
+
+const renderUserInfoHeader = (title: string, firstName: string, lastName: string) => (title ? (
+  <div className="profile-userinfo__info__header">
+    <span
+      className="profile-userinfo__info__header__username"
+    >
+      {`${title} ${firstName} ${lastName}`}
+    </span>
+    <EditProfileBtn />
+  </div>
+) : <div />);
+
+const renderUserInfoFooter = (userId: string) => (userId ? (
+  <div className="profile-userinfo__info__footer">
+    <FieldValue field="ID" value={userId} />
+  </div>
+) : <div />);
+
+const renderUserAbout = (userInfo: UserProfileType) => {
+  if (userInfo) {
+    return (
+      <div>
+        <ul>
+          <li><FieldValue field="Пол" value={localeGenderRu(userInfo.gender)} /></li>
+          <li><FieldValue field="Дата рождения" value={moment(userInfo.dateOfBirth).format('LL')} /></li>
+          <li><FieldValue field="Дата регистрации" value={moment(userInfo.registerDate).format('LL')} /></li>
+          <li><FieldValue field="Email" value={userInfo.email} /></li>
+          <li><FieldValue field="Телефон" value={userInfo.phone} /></li>
+        </ul>
+      </div>
+    );
+  }
+  return <div />;
+};
+
+const ProfileForm = ({
+  user, postsData, loadUserProfileAction, loadUserPostsAction,
+}: Props) => {
+  const { userId } = useParams() as any;
+
+  useEffect(() => {
+    loadUserProfileAction(userId);
+    loadUserPostsAction(userId, 0, 6);
+  }, []);
+
+  const handlePageChange = (newPage: number) => loadUserPostsAction(userId, newPage, postsData.limit);
+
+  return (
+    <main className="profile-form custom-container page-layout__content">
+      <div className="profile-userinfo">
+        {renderUserImage(user.picture)}
+        <div className="profile-userinfo__info">
+          {renderUserInfoHeader(user.title, user.firstName, user.lastName)}
+          {renderUserAbout(user)}
+          {renderUserInfoFooter(userId)}
+        </div>
+      </div>
+      <Posts
+        handlePageChange={handlePageChange}
+        posts={postsData.data}
+        limit={postsData.limit}
+        currentPage={postsData.page}
+        totalElements={postsData.total}
+      />
+    </main>
+  );
+};
+
+export default connect((state: IStoreUserProfile) => ({
+  user: state.userProfile.user,
+  postsData: state.userProfile.postsData,
+}), ((dispatch) => bindActionCreators(actions, dispatch)))(ProfileForm);

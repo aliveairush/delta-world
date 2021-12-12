@@ -32,6 +32,10 @@ h1, h2, h3, h4, h5, h6 {
   color: inherit;
 }
 
+ul {
+  list-style-type: none;
+}
+
 a {
   color: inherit;
 }
@@ -42,24 +46,24 @@ a {
 
 @media (min-width: 575.98px) {
   .custom-container {
-    padding: 0 calc(50% - 270px);
+    padding: 0 calc(50% - 170px);
   }
 }
 
 @media (min-width: 767.98px) {
   .custom-container {
-    padding: 0 calc(50% - 360px);
+    padding: 0 calc(50% - 260px);
   }
 }
 
 @media (min-width: 991.98px) {
   .custom-container {
-    padding: 0 calc(50% - 480px);
+    padding: 0 calc(50% - 380px);
   }
 }
 
 @media (min-width: 1199.98px) {
   .custom-container {
-    padding: 0 calc(50% - 590px);
+    padding: 0 calc(50% - 490px);
   }
 }

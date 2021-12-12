@@ -14,6 +14,7 @@
     "@types/react-router-dom": "^5.3.2",
     "antd": "^4.17.3",
     "immer": "^9.0.7",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
@@ -54,7 +55,9 @@
       "jsx-a11y/interactive-supports-focus": "off",
       "jsx-a11y/no-static-element-interactions": "off",
       "@typescript-eslint/default-param-last": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
       "no-param-reassign": "off",
+      "linebreak-style": "off",
       "max-len": [
         1,
         120

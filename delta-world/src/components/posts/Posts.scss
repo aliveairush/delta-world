@@ -1,0 +1,63 @@
+@import "../../scss/scss-varibales";
+
+.post-cards {
+  padding: 20px 0 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(calc(33% - 15px), 1fr));
+  grid-gap: 15px;
+}
+
+.post-card {
+  background-color: $primary-bg-color-light;
+  border: 2px solid $border-color-light;
+  border-radius: 15px;
+  padding: 20px 20px;
+  min-width: 200px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  row-gap: 10px;
+
+  &__created-by {
+    width: 100%;
+
+    & img {
+      display: block;
+      float: left;
+      width: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+
+    & span {
+      display: block;
+    }
+
+    &__username {
+      font-size: 18px;
+    }
+
+    &__date {
+      font-size: 14px;
+      color: $secondary-text-color-light;
+    }
+  }
+
+  &__img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 1px solid $border-color-light;
+  }
+
+  &__desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
