@@ -1,5 +1,4 @@
-/* eslint-disable */
-import { IFormUserRegistration } from "../types/dummyApi";
+import { IFormUserRegistration, UserProfileType } from "../types/dummyApi";
 import {
   APP_ID_HEADER,
   APP_ID_VALUE, BASE_URL,
@@ -7,7 +6,7 @@ import {
   CONTENT_TYPE_VALUE, LIMIT_QUERY_PARAM, PAGE_QUERY_PARAM,
   USER_CREATE_URL, USER_URL,
 } from "../constants/dummyApi";
-import { HTTP_GET, HTTP_POST } from "../types/common";
+import { HTTP_GET, HTTP_POST, HTTP_PUT } from "../types/common";
 
 const doGetRequest = (path: string, searchParams?: Record<string, any>) => {
   const url = new URL(path, BASE_URL);
@@ -48,3 +47,12 @@ export const apiGetUserPosts = (userId: string, page?: number, limit?: number) =
   [PAGE_QUERY_PARAM]: page,
   [LIMIT_QUERY_PARAM]: limit,
 });
+
+export const apiPutUserProfile = (newUserData: UserProfileType) => fetch(`${USER_URL}/${newUserData.id}`, {
+  method: HTTP_PUT,
+  headers: new Headers({
+    [APP_ID_HEADER]: APP_ID_VALUE,
+    [CONTENT_TYPE_HEADER]: CONTENT_TYPE_VALUE,
+  }),
+  body: JSON.stringify(newUserData),
+}).then((resp) => resp.json());

@@ -1,5 +1,6 @@
 @import "../../scss/scss-varibales";
 
+
 .edit-profile-modal {
   width: 350px;
 
@@ -8,18 +9,21 @@
     border-radius: $border-radius;
   }
 
+  &__change-img-input {
+    padding: 10px 0 0 0 ;
+  }
+
   &__edit-img-btns {
     display: flex;
     justify-content: space-between;
-    padding: 15px 0;
+    padding: 10px 0 0 ;
+  }
 
-    &::after {
-      color: $secondary-text-color-light;
-      position: absolute;
-      content: "|";
-      width: 100%;
-      left: 50%;
-    }
+  &__edit-img-btn {
+    flex: 1 1 auto;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
   }
 
   &__form {
@@ -39,6 +43,10 @@
     text-align: center;
     text-decoration: underline;
     font-weight: bolder;
+
+    & span {
+      cursor: pointer;
+    }
   }
 
   &__input {
@@ -53,5 +61,19 @@
       height: 24px;
       text-align: center;
     }
+
+    & .ant-form-item-control .ant-form-item-control-input .ant-form-item-control-input-content .ant-select-single .ant-select-selector{
+      //backgro/und-color: red;
+      //border: 10px solid green;
+      height: 24px;
+
+      & input {
+        height: 24px;
+      }
+    }
   }
+}
+
+.edit-profile-modal__edit-img-btn + .edit-profile-modal__edit-img-btn {
+  border-left: $border-light;
 }

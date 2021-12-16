@@ -18,8 +18,10 @@ moment.locale('ru');
 interface Props {
   user: UserProfileType,
   postsData: PostsDataType,
+  showModal: boolean,
   loadUserProfileAction: (userId: string) => void
   loadUserPostsAction: (userId: string, page: number, limit: number) => void
+  setShowModalAction: (showModal: boolean) => void
 }
 
 const renderUserImage = (userPicture: string) => (userPicture ? (
@@ -31,14 +33,14 @@ const renderUserImage = (userPicture: string) => (userPicture ? (
   </div>
 ) : <div />);
 
-const renderUserInfoHeader = (title: string, firstName: string, lastName: string) => (title ? (
+const renderUserInfoHeader = (user: UserProfileType, showModal: boolean, setShowModal: Function) => (user.title ? (
   <div className="profile-userinfo__info__header">
     <span
       className="profile-userinfo__info__header__username"
     >
-      {`${title} ${firstName} ${lastName}`}
+      {`${user.title} ${user.firstName} ${user.lastName}`}
     </span>
-    <EditProfileBtn />
+    <EditProfileBtn showModal={showModal} setShowModal={setShowModal} userData={user} />
   </div>
 ) : <div />);
 
@@ -66,7 +68,7 @@ const renderUserAbout = (userInfo: UserProfileType) => {
 };
 
 const ProfileForm = ({
-  user, postsData, loadUserProfileAction, loadUserPostsAction,
+  user, postsData, showModal, loadUserProfileAction, loadUserPostsAction, setShowModalAction,
 }: Props) => {
   const { userId } = useParams() as any;
 
@@ -82,7 +84,7 @@ const ProfileForm = ({
       <div className="profile-userinfo">
         {renderUserImage(user.picture)}
         <div className="profile-userinfo__info">
-          {renderUserInfoHeader(user.title, user.firstName, user.lastName)}
+          {renderUserInfoHeader(user, showModal, setShowModalAction)}
           {renderUserAbout(user)}
           {renderUserInfoFooter(userId)}
         </div>
@@ -101,4 +103,5 @@ const ProfileForm = ({
 export default connect((state: IStoreUserProfile) => ({
   user: state.userProfile.user,
   postsData: state.userProfile.postsData,
+  showModal: state.userProfile.showModal,
 }), ((dispatch) => bindActionCreators(actions, dispatch)))(ProfileForm);

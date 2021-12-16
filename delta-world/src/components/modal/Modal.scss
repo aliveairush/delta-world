@@ -5,11 +5,14 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.8);
-  overflow-y: scroll;
-  padding-bottom: 50px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  //padding-bottom: 50px;
+  z-index: 3;
+  height: 100vh;
 
   display: flex;
-  align-items: center;
+  //align-items: center;
   justify-content: center;
   opacity: 0;
   transition: all 0.3s ease-in-out;
@@ -31,17 +34,18 @@
 
     & .modal-content {
       opacity: 1;
-      transform: translateY(0);
+      //transform: translateY(0);
     }
   }
 }
 .modal-content {
   border-radius: 15px;
-  transform: translateY(-200px);
+  //transform: translateY(-200px);
   transition: all 0.3s ease-in-out;
-  margin-top: 300px;
+  margin: 100px 0;
   opacity: 0;
   background-color: #F2F2F2;
+  height: fit-content;
 }
 
 .modal-header,
