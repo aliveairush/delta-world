@@ -61,7 +61,8 @@
       "max-len": [
         1,
         120
-      ]
+      ],
+      "import/no-extraneous-dependencies": "off"
     }
   },
   "browserslist": {
@@ -79,6 +80,7 @@
   "devDependencies": {
     "eslint-config-airbnb": "^19.0.2",
     "eslint-config-airbnb-typescript": "^16.1.0",
+    "redux-devtools-extension": "^2.13.9",
     "sass": "^1.44.0"
   }
 }
