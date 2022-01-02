@@ -1,0 +1,25 @@
+@import "../../scss/scss-varibales";
+
+.card {
+  background-color: $primary-bg-color-light;
+  border: 2px solid $border-color-light;
+  border-radius: 15px;
+  padding: 20px 15%;
+  min-width: 200px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__img {
+    width: 100%;
+    border-radius: 15px;
+    border: 1px solid $border-color-light;
+  }
+
+  &__name {
+    color: $primary-text-color-light;
+    padding: 30px 0 0 0;
+  }
+}

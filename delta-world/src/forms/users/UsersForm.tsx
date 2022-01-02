@@ -1,35 +1,59 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./UsersForm.scss";
 import { Pagination } from "antd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import UserCard from '../../components/user-card/UserCard';
+import { IStoreUserList } from "../../types/state";
+import * as actions from '../../actions/userListActions';
+import { UserListDataType } from "../../types/dummyApi";
 
-const UsersForm = () => (
-  <div className="users-form custom-container page-layout__content">
-    <div className="cards">
-      <div className="card">
-        <img className="card__img" alt="cats" src="https://fatcatart.com/wp-content/uploads/2011/02/Malevich_Black_Square-cat-sm1.jpg" />
-        <span className="card__name">Name</span>
+interface Props {
+  loading: boolean,
+  userListData: UserListDataType,
+  loadUserListAction: (page?: number, limit?: number) => void,
+}
+
+const UsersForm = ({ loading, userListData, loadUserListAction }: Props) => {
+  useEffect(() => {
+    loadUserListAction(0, 6);
+  }, []);
+
+  return (
+    <div className="users-form custom-container page-layout__content">
+      <div>
+        {loading ? 'true' : 'false'}
+        {userListData.data?.length}
       </div>
-      <div className="card">
-        <img className="card__img" alt="cats" src="https://fatcatart.com/wp-content/uploads/2011/02/Malevich_Black_Square-cat-sm1.jpg" />
-        <span className="card__name">Name</span>
+      <div className="cards">
+        {userListData.data?.map((elem) => (
+          <UserCard
+            picture={elem.picture}
+            firstName={elem.firstName}
+            lastName={elem.lastName}
+            title={elem.title}
+            id={elem.id}
+            key={elem.id}
+          />
+        ))}
       </div>
-      <div className="card">
-        <img className="card__img" alt="cats" src="https://fatcatart.com/wp-content/uploads/2011/02/Malevich_Black_Square-cat-sm1.jpg" />
-        <span className="card__name">Name</span>
-      </div>
-      <div className="card">
-        <img className="card__img" alt="cats" src="https://fatcatart.com/wp-content/uploads/2011/02/Malevich_Black_Square-cat-sm1.jpg" />
-        <span className="card__name">Name</span>
-      </div>
-      <div className="card">
-        <img className="card__img" alt="cats" src="https://fatcatart.com/wp-content/uploads/2011/02/Malevich_Black_Square-cat-sm1.jpg" />
-        <span className="card__name">Name</span>
+      <div className="users-form__pagination">
+        <Pagination
+          defaultCurrent={1}
+          onChange={(pageNumber) => {
+            loadUserListAction(pageNumber - 1, userListData.limit);
+          }}
+          defaultPageSize={userListData.limit}
+          current={userListData.page + 1}
+          total={userListData.total}
+          showSizeChanger={false}
+        />
       </div>
     </div>
-    <div className="users-form__pagination">
-      <Pagination defaultCurrent={1} total={50} />
-    </div>
-  </div>
-);
+  );
+};
 
-export default UsersForm;
+export default connect((state: IStoreUserList) => ({
+  loading: state.userList.loading,
+  userListData: state.userList.userListData,
+}), ((dispatch) => bindActionCreators(actions, dispatch)))(UsersForm);

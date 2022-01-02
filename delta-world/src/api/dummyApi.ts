@@ -55,4 +55,9 @@ export const apiPutUserProfile = (newUserData: UserProfileType) => fetch(`${USER
     [CONTENT_TYPE_HEADER]: CONTENT_TYPE_VALUE,
   }),
   body: JSON.stringify(newUserData),
-}).then((resp) => resp.json());
+}).then((resp) => (resp.json()));
+
+export const apiGetUserList = (page?: number, limit?: number) => doGetRequest(USER_URL, {
+  [PAGE_QUERY_PARAM]: page,
+  [LIMIT_QUERY_PARAM]: limit,
+});

@@ -54,3 +54,10 @@ export interface Post {
   publishDate: string,
   text: string
 }
+
+export interface UserListDataType {
+  data: Array<UserProfileType>,
+  limit: number,
+  page: number,
+  total: number,
+}
