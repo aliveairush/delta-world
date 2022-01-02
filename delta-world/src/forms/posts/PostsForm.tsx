@@ -1,60 +1,65 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './PostsForm.scss';
 import { Pagination } from "antd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import moment from "moment";
+import { Link } from "react-router-dom";
+import { IStorePostList } from "../../types/state";
+import { IPostListDataType } from "../../types/dummyApi";
+import * as actions from '../../actions/postListActions';
+import 'moment/locale/ru';
+import { USERS_ROUTE } from "../../constants/routes";
 
-const PostsForm = () => (
-  <main className="posts-form page-layout__content custom-container">
-    <div className="posts">
-      <div className="post">
-        <div className="post__created-by">
-          <img className="post__created-by__img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShvFeqHFVwTB7Y2MrniyyyiEgyLMJRC77JafPEhXFdvtTQKE97HmuGeP6kdga6re8o_Qg&usqp=CAU" alt="tony" />
-          <span className="post__created-by__username">mr David </span>
-          <span className="post__created-by__date">1 may 04:20</span>
-        </div>
-        <img className="post__img" alt="cats" src="https://static.remove.bg/remove-bg-web/54743c30904cc98f30bb79359718a5ffd69392cd/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg" />
-        <span className="post__desc">Товарищи! рамки и место обучения кадров представляет собой интересный эксперимент проверки позиций, занимаемых участниками в отношении поставленных задач.  </span>
-      </div>
-      <div className="post">
-        <div className="post__created-by">
-          <img className="post__created-by__img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShvFeqHFVwTB7Y2MrniyyyiEgyLMJRC77JafPEhXFdvtTQKE97HmuGeP6kdga6re8o_Qg&usqp=CAU" alt="tony" />
-          <span className="post__created-by__username">mr David </span>
-          <span className="post__created-by__date">1 may 04:20</span>
-        </div>
-        <img className="post__img" alt="cats" src="https://static.remove.bg/remove-bg-web/54743c30904cc98f30bb79359718a5ffd69392cd/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg" />
-        <span className="post__desc">Тоия кадров представляет собой </span>
-      </div>
-      <div className="post">
-        <div className="post__created-by">
-          <img className="post__created-by__img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShvFeqHFVwTB7Y2MrniyyyiEgyLMJRC77JafPEhXFdvtTQKE97HmuGeP6kdga6re8o_Qg&usqp=CAU" alt="tony" />
-          <span className="post__created-by__username">mr David </span>
-          <span className="post__created-by__date">1 may 04:20</span>
-        </div>
-        <img className="post__img" alt="cats" src="https://static.remove.bg/remove-bg-web/54743c30904cc98f30bb79359718a5ffd69392cd/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg" />
-        <span className="post__desc">Товарищи! рамки и место обучения кадров представляет собой </span>
-      </div>
-      <div className="post">
-        <div className="post__created-by">
-          <img className="post__created-by__img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShvFeqHFVwTB7Y2MrniyyyiEgyLMJRC77JafPEhXFdvtTQKE97HmuGeP6kdga6re8o_Qg&usqp=CAU" alt="tony" />
-          <span className="post__created-by__username">mr David </span>
-          <span className="post__created-by__date">1 may 04:20</span>
-        </div>
-        <img className="post__img" alt="cats" src="https://static.remove.bg/remove-bg-web/54743c30904cc98f30bb79359718a5ffd69392cd/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg" />
-        <span className="post__desc">Товарищи! рамки и место обучения кадров представляет собой </span>
-      </div>
-      <div className="post">
-        <div className="post__created-by">
-          <img className="post__created-by__img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShvFeqHFVwTB7Y2MrniyyyiEgyLMJRC77JafPEhXFdvtTQKE97HmuGeP6kdga6re8o_Qg&usqp=CAU" alt="tony" />
-          <span className="post__created-by__username">mr David </span>
-          <span className="post__created-by__date">1 may 04:20</span>
-        </div>
-        <img className="post__img" alt="cats" src="https://static.remove.bg/remove-bg-web/54743c30904cc98f30bb79359718a5ffd69392cd/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg" />
-        <span className="post__desc">Товарищи! рамки и место обучения кадров представляет собой интересный эксперимент проверки позиций, занимаемых участниками в отношении поставленных задач.  </span>
-      </div>
-    </div>
-    <div className="posts-form__pagination">
-      <Pagination defaultCurrent={1} total={50} />
-    </div>
-  </main>
-);
+moment.locale('ru');
 
-export default PostsForm;
+interface Props {
+  postListData: IPostListDataType,
+  loadPostListAction: (page?: number, limit?: number) => void;
+}
+
+const PostsForm = ({ postListData, loadPostListAction } : Props) => {
+  useEffect(() => {
+    loadPostListAction(0, 6);
+  }, []);
+
+  return (
+    <main className="posts-form page-layout__content custom-container">
+      <div className="posts">
+        {postListData.data?.map((post) => (
+          <div className="post" key={post.id}>
+            <div className="post__created-by">
+              <Link to={`${USERS_ROUTE}/${post.owner.id}`}>
+                <img className="post__created-by__img" src={post.owner.picture} alt={post.owner.firstName} />
+              </Link>
+              <Link to={`${USERS_ROUTE}/${post.owner.id}`}>
+                <span className="post__created-by__username">{`${post.owner.title} ${post.owner.firstName}`}</span>
+              </Link>
+              <span className="post__created-by__date">{moment(post.publishDate).format('LL')}</span>
+            </div>
+            <img className="post__img" alt="Post img" src={post.image} />
+            <span className="post__desc">{post.text}</span>
+          </div>
+        ))}
+
+      </div>
+      <div className="posts-form__pagination">
+        <Pagination
+          defaultCurrent={1}
+          onChange={(pageNumber) => {
+            loadPostListAction(pageNumber - 1, postListData.limit);
+          }}
+          defaultPageSize={postListData.limit}
+          current={postListData.page + 1}
+          total={postListData.total}
+          showSizeChanger={false}
+        />
+      </div>
+    </main>
+  );
+};
+
+export default connect((state: IStorePostList) => ({
+  loading: state.postList.loading,
+  postListData: state.postList.postListData,
+}), (dispatch) => bindActionCreators(actions, dispatch))(PostsForm);

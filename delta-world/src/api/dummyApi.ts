@@ -3,7 +3,7 @@ import {
   APP_ID_HEADER,
   APP_ID_VALUE, BASE_URL,
   CONTENT_TYPE_HEADER,
-  CONTENT_TYPE_VALUE, LIMIT_QUERY_PARAM, PAGE_QUERY_PARAM,
+  CONTENT_TYPE_VALUE, LIMIT_QUERY_PARAM, PAGE_QUERY_PARAM, POST_URL,
   USER_CREATE_URL, USER_URL,
 } from "../constants/dummyApi";
 import { HTTP_GET, HTTP_POST, HTTP_PUT } from "../types/common";
@@ -58,6 +58,11 @@ export const apiPutUserProfile = (newUserData: UserProfileType) => fetch(`${USER
 }).then((resp) => (resp.json()));
 
 export const apiGetUserList = (page?: number, limit?: number) => doGetRequest(USER_URL, {
+  [PAGE_QUERY_PARAM]: page,
+  [LIMIT_QUERY_PARAM]: limit,
+});
+
+export const apiGetPostList = (page?: number, limit?: number) => doGetRequest(POST_URL, {
   [PAGE_QUERY_PARAM]: page,
   [LIMIT_QUERY_PARAM]: limit,
 });

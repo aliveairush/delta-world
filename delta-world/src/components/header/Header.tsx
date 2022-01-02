@@ -1,7 +1,11 @@
 import React from "react";
 import './Header.scss';
 import { FaRegImages, FiUsers } from "react-icons/all";
+import { Link } from "react-router-dom";
 import logo from '../../assets/images/logo.png';
+import {
+  LOGIN_ROUTE, POSTS_ROUTE, REGISTRATION_ROUTE, USERS_ROUTE,
+} from "../../constants/routes";
 
 const Header = () => (
   <header className="header page-layout__header header custom-container">
@@ -10,18 +14,18 @@ const Header = () => (
       <span>Delta World</span>
     </div>
     <div className="header__center">
-      <div>
+      <Link to={USERS_ROUTE} className="link">
         <FiUsers />
         <span>Пользователи</span>
-      </div>
-      <div>
+      </Link>
+      <Link to={POSTS_ROUTE} className="link">
         <FaRegImages />
         <span>Посты</span>
-      </div>
+      </Link>
     </div>
     <div className="header__auth">
-      <span>Вход</span>
-      <span>Регистрация</span>
+      <Link to={LOGIN_ROUTE} className="link">Вход</Link>
+      <Link to={REGISTRATION_ROUTE} className="link">Регистрация</Link>
     </div>
   </header>
 );

@@ -1,5 +1,7 @@
 import Gender from "./Gender";
-import {PostsDataType, UserListDataType, UserProfileType} from "./dummyApi";
+import {
+  IPostListDataType, PostsDataType, UserListDataType, UserProfileType,
+} from "./dummyApi";
 
 export interface IStateRegistration {
   name: string,
@@ -32,4 +34,13 @@ export interface IStateUserList {
 
 export interface IStoreUserList {
   userList: IStateUserList,
+}
+
+export interface IStatePostList {
+  loading: boolean,
+  postListData: IPostListDataType
+}
+
+export interface IStorePostList {
+  postList: IStatePostList
 }

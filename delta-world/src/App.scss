@@ -39,6 +39,13 @@ ul {
 a {
   color: inherit;
 }
+.link {
+  color: inherit;
+
+  &:hover {
+    color: inherit;
+  }
+}
 
 .custom-container {
   padding: 0 15px;

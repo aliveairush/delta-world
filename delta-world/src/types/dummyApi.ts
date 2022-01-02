@@ -61,3 +61,10 @@ export interface UserListDataType {
   page: number,
   total: number,
 }
+
+export interface IPostListDataType {
+  data: Array<Post>,
+  limit: number,
+  page: number,
+  total: number,
+}

@@ -11,3 +11,5 @@ export const LIMIT_QUERY_PARAM = 'limit';
 
 export const CONTENT_TYPE_HEADER = 'Content-Type';
 export const CONTENT_TYPE_VALUE = 'application/json;charset=utf-8';
+
+export const POST_URL = `${BASE_URL}/post`;
