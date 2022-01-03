@@ -95,6 +95,7 @@ const ProfileForm = ({
         limit={postsData.limit}
         currentPage={postsData.page}
         totalElements={postsData.total}
+        showAuthor={false}
       />
     </main>
   );

@@ -7,7 +7,8 @@
   grid-gap: 15px;
 }
 
-.post-card {
+
+.post {
   background-color: $primary-bg-color-light;
   border: 2px solid $border-color-light;
   border-radius: 15px;
@@ -38,6 +39,7 @@
 
     &__username {
       font-size: 18px;
+      color: $primary-text-color-light;
     }
 
     &__date {
@@ -48,7 +50,7 @@
 
   &__img {
     width: 100%;
-    aspect-ratio: 1/1;
+    aspect-ratio: 10/8;
     object-fit: cover;
     border-radius: 15px;
     border: 1px solid $border-color-light;
