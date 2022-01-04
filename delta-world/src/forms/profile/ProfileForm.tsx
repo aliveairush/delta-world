@@ -34,54 +34,8 @@ interface Props {
   commentListData: ICommentListDataType,
   updateCurrentPostDataAction: Function;
   hidePostModalAction: EMPTY_FUNCTION;
+  authorizedUser: UserProfileType | null
 }
-
-const renderUserImage = (userPicture: string) => (
-  <div className="profile-userinfo__image">
-    <img
-      src={userPicture || defaultPicture}
-      alt="avatar"
-    />
-  </div>
-);
-
-const renderUserInfoHeader = (user: UserProfileType, showModal: boolean, setShowModal: Function) => {
-  const authorizedUser = JSON.parse(localStorage.getItem("authorizedUser")!);
-
-  return authorizedUser.id === user.id ? (
-    <div className="profile-userinfo__info__header">
-      <span
-        className="profile-userinfo__info__header__username"
-      >
-        {`${user.title} ${user.firstName} ${user.lastName}`}
-      </span>
-      <EditProfileBtn showModal={showModal} setShowModal={setShowModal} userData={user} />
-    </div>
-  ) : <div />;
-};
-
-const renderUserInfoFooter = (userId: string) => (userId ? (
-  <div className="profile-userinfo__info__footer">
-    <FieldValue field="ID" value={userId} />
-  </div>
-) : <div />);
-
-const renderUserAbout = (userInfo: UserProfileType) => {
-  if (userInfo) {
-    return (
-      <div>
-        <ul>
-          <li><FieldValue field="Пол" value={localeGenderRu(userInfo.gender)} /></li>
-          <li><FieldValue field="Дата рождения" value={moment(userInfo.dateOfBirth).format('LL')} /></li>
-          <li><FieldValue field="Дата регистрации" value={moment(userInfo.registerDate).format('LL')} /></li>
-          <li><FieldValue field="Email" value={userInfo.email} /></li>
-          <li><FieldValue field="Телефон" value={userInfo.phone} /></li>
-        </ul>
-      </div>
-    );
-  }
-  return <div />;
-};
 
 const ProfileForm = ({
   user, postsData, showModal, loadUserProfileAction, loadUserPostsAction, setShowModalAction,
@@ -90,6 +44,7 @@ const ProfileForm = ({
   showPostModal,
   updateCurrentPostDataAction,
   hidePostModalAction,
+  authorizedUser,
 }: Props) => {
   const { userId } = useParams() as any;
 
@@ -100,6 +55,52 @@ const ProfileForm = ({
 
   const handlePageChange = (newPage: number) => loadUserPostsAction(userId, newPage - 1, postsData.limit);
 
+  const renderUserImage = (userPicture: string) => (
+    <div className="profile-userinfo__image">
+      <img
+        src={userPicture || defaultPicture}
+        alt="avatar"
+      />
+    </div>
+  );
+
+  const renderUserInfoHeader = (
+    user: UserProfileType,
+    showModal: boolean,
+    setShowModal: Function,
+  ) => (authorizedUser && authorizedUser.id === user.id ? (
+    <div className="profile-userinfo__info__header">
+      <span
+        className="profile-userinfo__info__header__username"
+      >
+        {`${user.title} ${user.firstName} ${user.lastName}`}
+      </span>
+      <EditProfileBtn showModal={showModal} setShowModal={setShowModal} userData={user} />
+    </div>
+  ) : <div />);
+
+  const renderUserInfoFooter = (userId: string) => (userId ? (
+    <div className="profile-userinfo__info__footer">
+      <FieldValue field="ID" value={userId} />
+    </div>
+  ) : <div />);
+
+  const renderUserAbout = (userInfo: UserProfileType) => {
+    if (userInfo) {
+      return (
+        <div>
+          <ul>
+            <li><FieldValue field="Пол" value={localeGenderRu(userInfo.gender)} /></li>
+            <li><FieldValue field="Дата рождения" value={moment(userInfo.dateOfBirth).format('LL')} /></li>
+            <li><FieldValue field="Дата регистрации" value={moment(userInfo.registerDate).format('LL')} /></li>
+            <li><FieldValue field="Email" value={userInfo.email} /></li>
+            <li><FieldValue field="Телефон" value={userInfo.phone} /></li>
+          </ul>
+        </div>
+      );
+    }
+    return <div />;
+  };
   return (
     <main className="profile-form custom-container page-layout__content">
       <div className="profile-userinfo">
@@ -142,4 +143,5 @@ export default connect((state: IStore) => ({
   showPostModal: state.postModal.showPostModal,
   // loadingCommentList: state.postModal.loadingCommentList,
   commentListData: state.postModal.commentListData,
+  authorizedUser: state.authorizedUser.authorizedUser,
 }), mapDispatchToProps)(ProfileForm);

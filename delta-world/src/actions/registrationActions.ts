@@ -5,7 +5,7 @@ import {
   REGISTRATION_DATE_OF_BIRTH_CHANGE,
   REGISTRATION_ERROR,
   REGISTRATION_INPUT_CHANGE,
-  REGISTRATION_SUCCESS,
+  REGISTRATION_SUCCESS, SAVE_AUTHORIZED_USER_DATA,
 } from "../constants/actions";
 import { apiPostCreateUser } from "../api/dummyApi";
 import { IFormUserRegistration, IRawFormUserRegistration } from "../types/dummyApi";
@@ -47,6 +47,10 @@ export const registerUserAction = (formUser : IRawFormUserRegistration, navigate
       localStorage.setItem('authorizedUser', JSON.stringify(resp));
       dispatch({
         type: REGISTRATION_SUCCESS,
+      });
+      dispatch({
+        type: SAVE_AUTHORIZED_USER_DATA,
+        payload: resp,
       });
     })
     .catch((error) => {

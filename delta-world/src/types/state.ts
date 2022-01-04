@@ -50,11 +50,16 @@ export interface IStatePost {
   commentListData: ICommentListDataType,
 }
 
+export interface IStateAuthUser{
+  authorizedUser: UserProfileType | null
+}
+
 export interface IStore {
   postList: IStatePostList
   postModal: IStatePost,
   userList: IStateUserList,
   userProfile: IStateUserProfile;
   registration: IStateRegistration
+  authorizedUser: IStateAuthUser
 
 }
