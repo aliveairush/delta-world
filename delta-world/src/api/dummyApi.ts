@@ -66,3 +66,5 @@ export const apiGetPostList = (page?: number, limit?: number) => doGetRequest(PO
   [PAGE_QUERY_PARAM]: page,
   [LIMIT_QUERY_PARAM]: limit,
 });
+
+export const apiGetPostCommentList = (postId: string) => doGetRequest(`${POST_URL}/${postId}/comment`);

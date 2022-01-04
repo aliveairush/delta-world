@@ -1,5 +1,7 @@
 import Gender from "./Gender";
 import {
+  ICommentListDataType,
+  IPost,
   IPostListDataType, PostsDataType, UserListDataType, UserProfileType,
 } from "./dummyApi";
 
@@ -41,6 +43,18 @@ export interface IStatePostList {
   postListData: IPostListDataType
 }
 
-export interface IStorePostList {
+export interface IStatePost {
+  showPostModal: boolean,
+  loadingCommentList: boolean,
+  post: IPost,
+  commentListData: ICommentListDataType,
+}
+
+export interface IStore {
   postList: IStatePostList
+  postModal: IStatePost,
+  userList: IStateUserList,
+  userProfile: IStateUserProfile;
+  registration: IStateRegistration
+
 }

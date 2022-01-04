@@ -40,13 +40,13 @@ export interface UserProfileType {
 }
 
 export interface PostsDataType {
-  data: Array<Post>;
+  data: Array<IPost>;
   limit: number,
   page: number,
   total: number,
 }
 
-export interface Post {
+export interface IPost {
   id: string,
   image: string,
   likes: number,
@@ -63,7 +63,21 @@ export interface UserListDataType {
 }
 
 export interface IPostListDataType {
-  data: Array<Post>,
+  data: Array<IPost>,
+  limit: number,
+  page: number,
+  total: number,
+}
+
+export interface ICommentType {
+  id: string,
+  message: string,
+  owner: UserOverviewType,
+  post: string,
+  publishDate: string,
+}
+export interface ICommentListDataType {
+  data: Array<ICommentType>,
   limit: number,
   page: number,
   total: number,

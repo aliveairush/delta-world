@@ -1,10 +1,11 @@
 import React, { ReactNode, useEffect } from "react";
 import "./Modal.scss";
 import { CloseOutlined } from "@ant-design/icons";
+import { EMPTY_FUNCTION } from "../../constants/common";
 
 interface Props {
   show: boolean,
-  onClose: ()=> void,
+  onClose: EMPTY_FUNCTION,
   children: ReactNode,
   title?: string,
 }

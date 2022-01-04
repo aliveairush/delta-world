@@ -1,0 +1,96 @@
+@import "src/scss/scss-varibales";
+
+.small-rounded-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+.post {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+
+  &__createdBy {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding-bottom: 15px;
+
+    &__authorImg {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 15px;
+    }
+
+    &__username {
+      font-size: 20px;
+    }
+
+    &__date {
+      margin-left: auto;
+      font-size: 16px;
+      color: $secondary-text-color-light;
+    }
+  }
+
+  &__img img {
+    width: 100%;
+    border-radius: 15px;
+  }
+
+  &__text {
+    padding: 20px 0;
+    font-size: 16px;
+  }
+
+  &__comments {
+    display: grid;
+    grid-template-columns: repeat(2, calc(50% - 7px));
+    grid-gap: 15px;
+  }
+
+  &__commentsPagination {
+    padding: 20px 0 0 0;
+    align-self: end;
+  }
+}
+
+.comment {
+  background-color: $primary-bg-color-light;
+  padding: 10px;
+  border: 2px solid $border-color-light;
+  border-radius: 10px;
+
+  &__img {
+    display: block;
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+    padding-bottom: 20px;
+
+    & img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    &Username{
+      font-weight: bolder;
+    }
+
+    &Date{
+      color: $secondary-text-color-light;
+    }
+  }
+
+
+}

@@ -2,16 +2,22 @@ import React, { useEffect } from 'react';
 import './ProfileForm.scss';
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import moment from "moment";
-import * as actions from '../../actions/userProfileActions';
-import { IStoreUserProfile } from "../../types/state";
-import { PostsDataType, UserProfileType } from "../../types/dummyApi";
+import { IStore } from "../../types/state";
+import {
+  ICommentListDataType, IPost, PostsDataType, UserProfileType,
+} from "../../types/dummyApi";
 import Posts from "../../components/posts/Posts";
 import FieldValue from "../../components/field-value/FieldValue";
 import 'moment/locale/ru';
 import { localeGenderRu } from "../../utils/converters";
 import EditProfileBtn from "../../components/user-profile-components/edit-profile-btn/EditProfileBtn";
+import { loadUserPostsAction, loadUserProfileAction, setShowModalAction } from "../../actions/userProfileActions";
+import { hidePostModalAction, updateCurrentPostDataAction } from "../../actions/postActions";
+import Post from "../../components/post/Post";
+import Modal from "../../components/modal/Modal";
+import { EMPTY_FUNCTION } from "../../constants/common";
 
 moment.locale('ru');
 
@@ -21,7 +27,12 @@ interface Props {
   showModal: boolean,
   loadUserProfileAction: (userId: string) => void
   loadUserPostsAction: (userId: string, page: number, limit: number) => void
-  setShowModalAction: (showModal: boolean) => void
+  setShowModalAction: (showModal: boolean) => void,
+  showPostModal: boolean,
+  post: IPost,
+  commentListData: ICommentListDataType,
+  updateCurrentPostDataAction: Function;
+  hidePostModalAction: EMPTY_FUNCTION;
 }
 
 const renderUserImage = (userPicture: string) => (userPicture ? (
@@ -69,6 +80,11 @@ const renderUserAbout = (userInfo: UserProfileType) => {
 
 const ProfileForm = ({
   user, postsData, showModal, loadUserProfileAction, loadUserPostsAction, setShowModalAction,
+  post,
+  commentListData,
+  showPostModal,
+  updateCurrentPostDataAction,
+  hidePostModalAction,
 }: Props) => {
   const { userId } = useParams() as any;
 
@@ -77,7 +93,7 @@ const ProfileForm = ({
     loadUserPostsAction(userId, 0, 6);
   }, []);
 
-  const handlePageChange = (newPage: number) => loadUserPostsAction(userId, newPage, postsData.limit);
+  const handlePageChange = (newPage: number) => loadUserPostsAction(userId, newPage - 1, postsData.limit);
 
   return (
     <main className="profile-form custom-container page-layout__content">
@@ -96,13 +112,29 @@ const ProfileForm = ({
         currentPage={postsData.page}
         totalElements={postsData.total}
         showAuthor={false}
+        handlePostClick={updateCurrentPostDataAction}
       />
+      <Modal show={showPostModal} onClose={hidePostModalAction}>
+        <Post post={post} commentListData={commentListData} />
+      </Modal>
     </main>
   );
 };
 
-export default connect((state: IStoreUserProfile) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  loadUserProfileAction: bindActionCreators(loadUserProfileAction, dispatch),
+  loadUserPostsAction: bindActionCreators(loadUserPostsAction, dispatch),
+  setShowModalAction: bindActionCreators(setShowModalAction, dispatch),
+  updateCurrentPostDataAction: bindActionCreators(updateCurrentPostDataAction, dispatch),
+  hidePostModalAction: bindActionCreators(hidePostModalAction, dispatch),
+});
+
+export default connect((state: IStore) => ({
   user: state.userProfile.user,
   postsData: state.userProfile.postsData,
   showModal: state.userProfile.showModal,
-}), ((dispatch) => bindActionCreators(actions, dispatch)))(ProfileForm);
+  post: state.postModal.post,
+  showPostModal: state.postModal.showPostModal,
+  // loadingCommentList: state.postModal.loadingCommentList,
+  commentListData: state.postModal.commentListData,
+}), mapDispatchToProps)(ProfileForm);

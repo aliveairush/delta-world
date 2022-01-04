@@ -7,6 +7,7 @@ import userProfileReducer from "./reducers/userProfileReducer";
 import {composeWithDevTools} from "redux-devtools-extension";
 import userListReducer from "./reducers/userListReducer";
 import postListReducer from "./reducers/postListReducer";
+import postModalReducer from "./reducers/modalPostReducer";
 
 const store = createStore(
   combineReducers({
@@ -14,6 +15,7 @@ const store = createStore(
     userProfile: userProfileReducer,
     userList: userListReducer,
     postList: postListReducer,
+    postModal: postModalReducer,
   }),
   composeWithDevTools(applyMiddleware(thunk))
 )
