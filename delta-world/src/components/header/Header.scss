@@ -41,5 +41,10 @@
       padding-left: 15px;
       border-left: $border-light;
     }
+    & img {
+      border-radius: 50%;
+      width: 40px;
+      margin-right: 15px;
+    }
   }
 }

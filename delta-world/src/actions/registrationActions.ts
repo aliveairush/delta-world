@@ -9,7 +9,7 @@ import {
 } from "../constants/actions";
 import { apiPostCreateUser } from "../api/dummyApi";
 import { IFormUserRegistration, IRawFormUserRegistration } from "../types/dummyApi";
-import { LOGIN_ROUTE } from "../constants/routes";
+import { USERS_ROUTE } from "../constants/routes";
 
 export const handleInputChangeAction = (event: BaseSyntheticEvent) => (dispatch: Dispatch) => {
   dispatch({
@@ -43,7 +43,8 @@ export const registerUserAction = (formUser : IRawFormUserRegistration, navigate
   apiPostCreateUser(apiRegUserBody)
     .then((resp) => {
       if (resp.error) throw new Error(resp.error);
-      navigate(LOGIN_ROUTE);
+      navigate(`${USERS_ROUTE}/${resp.id}`);
+      localStorage.setItem('authorizedUser', JSON.stringify(resp));
       dispatch({
         type: REGISTRATION_SUCCESS,
       });

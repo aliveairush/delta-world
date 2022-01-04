@@ -18,6 +18,7 @@ import { hidePostModalAction, updateCurrentPostDataAction } from "../../actions/
 import Post from "../../components/post/Post";
 import Modal from "../../components/modal/Modal";
 import { EMPTY_FUNCTION } from "../../constants/common";
+import defaultPicture from '../../assets/images/default-avatar.png';
 
 moment.locale('ru');
 
@@ -35,25 +36,29 @@ interface Props {
   hidePostModalAction: EMPTY_FUNCTION;
 }
 
-const renderUserImage = (userPicture: string) => (userPicture ? (
+const renderUserImage = (userPicture: string) => (
   <div className="profile-userinfo__image">
     <img
-      src={userPicture}
+      src={userPicture || defaultPicture}
       alt="avatar"
     />
   </div>
-) : <div />);
+);
 
-const renderUserInfoHeader = (user: UserProfileType, showModal: boolean, setShowModal: Function) => (user.title ? (
-  <div className="profile-userinfo__info__header">
-    <span
-      className="profile-userinfo__info__header__username"
-    >
-      {`${user.title} ${user.firstName} ${user.lastName}`}
-    </span>
-    <EditProfileBtn showModal={showModal} setShowModal={setShowModal} userData={user} />
-  </div>
-) : <div />);
+const renderUserInfoHeader = (user: UserProfileType, showModal: boolean, setShowModal: Function) => {
+  const authorizedUser = JSON.parse(localStorage.getItem("authorizedUser")!);
+
+  return authorizedUser.id === user.id ? (
+    <div className="profile-userinfo__info__header">
+      <span
+        className="profile-userinfo__info__header__username"
+      >
+        {`${user.title} ${user.firstName} ${user.lastName}`}
+      </span>
+      <EditProfileBtn showModal={showModal} setShowModal={setShowModal} userData={user} />
+    </div>
+  ) : <div />;
+};
 
 const renderUserInfoFooter = (userId: string) => (userId ? (
   <div className="profile-userinfo__info__footer">
