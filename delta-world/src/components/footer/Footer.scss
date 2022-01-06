@@ -2,11 +2,13 @@
 
 .footer {
   border-top: $border-light;
-  background: $primary-bg-color-light;
+  background: $primary-bg-color;
 
   display: flex;
   justify-content: space-between;
   padding-top: 15px;
   padding-bottom: 20px;
+
+  transition: $color-transition;
 
 }

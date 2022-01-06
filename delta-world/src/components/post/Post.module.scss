@@ -33,7 +33,7 @@
     &__date {
       margin-left: auto;
       font-size: 16px;
-      color: $secondary-text-color-light;
+      color: $secondary-text-color;
     }
   }
 
@@ -60,9 +60,9 @@
 }
 
 .comment {
-  background-color: $primary-bg-color-light;
+  background-color: $primary-bg-color;
   padding: 10px;
-  border: 2px solid $border-color-light;
+  border: 2px solid $border-color;
   border-radius: 10px;
 
   &__img {
@@ -88,7 +88,7 @@
     }
 
     &Date{
-      color: $secondary-text-color-light;
+      color: $secondary-text-color;
     }
   }
 

@@ -23,8 +23,8 @@
 }
 
 .auth-form {
-  background-color: $primary-bg-color-light;
-  border: 2px solid $border-color-light;
+  background-color: $primary-bg-color;
+  border: 2px solid $border-color;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -33,6 +33,11 @@
   margin: 60px 0;
   width: 100%;
   padding: 20px 0;
+  transition: $color-transition;
+
+  & label {
+    color: $primary-text-color;
+  }
 
   &__title {
     font-weight: bold;
@@ -43,6 +48,15 @@
   &__content {
     width: 350px;
 
+    & input {
+      background-color: $body-bg-color;
+      color: $primary-text-color;
+
+      &::placeholder {
+        color: #515151;
+      }
+    }
+
     &__radio {
       width: 100%;
       text-align: center;
@@ -50,12 +64,14 @@
 
     &__datepicker {
       width: 100%;
+      background-color: $body-bg-color;
     }
 
     & button {
       width: 100%;
-      color: $primary-btn-text-color-light;
-      background-color: $primary-btn-bg-color-light;
+      color: $primary-btn-text-color;
+      background-color: $primary-btn-bg-color;
+      border: $border-light;
     }
   }
 
@@ -63,6 +79,6 @@
     font-size: 13px;
     font-weight: lighter;
     margin-top: -5px;
-    color: $secondary-text-color-light;
+    color: $secondary-text-color;
   }
 }
