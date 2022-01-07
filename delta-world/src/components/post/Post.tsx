@@ -2,6 +2,7 @@ import React from 'react';
 import { Pagination } from "antd";
 import styles from './Post.module.scss';
 import { ICommentListDataType, IPost } from "../../types/dummyApi";
+import { ShowIdHelper } from "../../wrappers/ShowIdHelper";
 
 interface Props {
   post: IPost,
@@ -10,11 +11,14 @@ interface Props {
 
 const Post = ({ post, commentListData } : Props) => (
   <article className={styles.post}>
-    <div className={styles.post__createdBy}>
-      <img className={styles.post__createdBy__authorImg} src={post.owner && post.owner.picture} alt="" />
-      <span className={styles.post__createdBy__username}>{post.owner && `${post.owner.title} ${post.owner.firstName} ${post.owner.lastName}`}</span>
-      <span className={styles.post__createdBy__date}>Date</span>
-    </div>
+    <ShowIdHelper id={post.owner?.id}>
+      <div className={styles.post__createdBy}>
+        { /* TODO Add link */}
+        <img className={styles.post__createdBy__authorImg} src={post.owner && post.owner.picture} alt="" />
+        <span className={styles.post__createdBy__username}>{post.owner && `${post.owner.title} ${post.owner.firstName} ${post.owner.lastName}`}</span>
+        <span className={styles.post__createdBy__date}>Date</span>
+      </div>
+    </ShowIdHelper>
     <div className={styles.post__img}>
       <img
         src={post?.image}

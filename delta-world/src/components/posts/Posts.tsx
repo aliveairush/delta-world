@@ -5,6 +5,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { IPost } from "../../types/dummyApi";
 import { USERS_ROUTE } from "../../constants/routes";
+import { ShowIdHelper } from "../../wrappers/ShowIdHelper";
 
 interface Props {
   showAuthor?: boolean
@@ -19,6 +20,7 @@ interface Props {
 const Posts = ({
   showAuthor = true, posts, currentPage, limit, totalElements, handlePageChange, handlePostClick,
 } : Props) => {
+  // TODO Refactor
   console.log("test");
   // const showModal = false;
   // const toggleShowModal = () => {
@@ -28,19 +30,23 @@ const Posts = ({
     <section>
       <div className="post-cards">
         {posts && posts.map((post) => (
-          <div className="post" key={post.id}>
+
+          <div className="post">
             {showAuthor && post.owner && (
-            <div className="post__created-by">
-              <Link to={`${USERS_ROUTE}/${post.owner.id}`}>
-                <img className="post__created-by__img" src={post.owner.picture} alt={post.owner.firstName} />
-              </Link>
-              <Link to={`${USERS_ROUTE}/${post.owner.id}`}>
-                <span className="post__created-by__username">{`${post.owner.title} ${post.owner.firstName}`}</span>
-              </Link>
-              <span className="post__created-by__date">{moment(post.publishDate).format('LL')}</span>
-            </div>
+            <ShowIdHelper id={post.id} key={post.id}>
+              <div className="post__created-by">
+                <Link to={`${USERS_ROUTE}/${post.owner.id}`}>
+                  <img className="post__created-by__img" src={post.owner.picture} alt={post.owner.firstName} />
+                </Link>
+                <Link to={`${USERS_ROUTE}/${post.owner.id}`}>
+                  <span className="post__created-by__username">{`${post.owner.title} ${post.owner.firstName}`}</span>
+                </Link>
+                <span className="post__created-by__date">{moment(post.publishDate).format('LL')}</span>
+              </div>
+            </ShowIdHelper>
             )}
             <div onClick={() => {
+              // TODO Refactor
               console.log('hello');
               // @ts-ignore
               handlePostClick(post);
@@ -50,6 +56,7 @@ const Posts = ({
               <span className="post__desc">{post.text}</span>
             </div>
           </div>
+
         ))}
       </div>
       <div className="posts-form__pagination">

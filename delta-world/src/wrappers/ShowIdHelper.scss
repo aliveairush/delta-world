@@ -1,0 +1,28 @@
+@import "../scss/scss-varibales";
+
+.show-id-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.show-id-wrapper__id {
+  color: $primary-text-color;
+  position: absolute;
+  background-color: $primary-bg-color;
+  border: 3px solid $border-color;
+  border-radius: 5px;
+  padding: 0 7px;
+  animation: slideToTop 0.7s 1 ease forwards ;
+}
+
+@keyframes slideToTop {
+  from {
+    top: 0;
+    opacity: 0;
+
+  }
+  to {
+    top: -25px;
+    opacity: 1;
+  }
+}

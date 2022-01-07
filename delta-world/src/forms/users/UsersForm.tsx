@@ -7,6 +7,7 @@ import UserCard from '../../components/user-card/UserCard';
 import { IStoreUserList } from "../../types/state";
 import * as actions from '../../actions/userListActions';
 import { UserListDataType } from "../../types/dummyApi";
+import { ShowIdHelper } from "../../wrappers/ShowIdHelper";
 
 interface Props {
   loading: boolean,
@@ -27,14 +28,16 @@ const UsersForm = ({ loading, userListData, loadUserListAction }: Props) => {
       </div>
       <div className="cards">
         {userListData.data?.map((elem) => (
-          <UserCard
-            picture={elem.picture}
-            firstName={elem.firstName}
-            lastName={elem.lastName}
-            title={elem.title}
-            id={elem.id}
-            key={elem.id}
-          />
+          <ShowIdHelper id={elem.id} key={elem.id}>
+            <UserCard
+              picture={elem.picture}
+              firstName={elem.firstName}
+              lastName={elem.lastName}
+              title={elem.title}
+              id={elem.id}
+              key={elem.id}
+            />
+          </ShowIdHelper>
         ))}
       </div>
       <div className="users-form__pagination">
