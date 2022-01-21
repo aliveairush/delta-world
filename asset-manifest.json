@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/delta-world/static/css/main.9e99a6ea.chunk.css",
+    "main.js": "/delta-world/static/js/main.9e05c7d5.chunk.js",
+    "main.js.map": "/delta-world/static/js/main.9e05c7d5.chunk.js.map",
+    "runtime-main.js": "/delta-world/static/js/runtime-main.01b45ef7.js",
+    "runtime-main.js.map": "/delta-world/static/js/runtime-main.01b45ef7.js.map",
+    "static/css/2.0ce74623.chunk.css": "/delta-world/static/css/2.0ce74623.chunk.css",
+    "static/js/2.fa24207c.chunk.js": "/delta-world/static/js/2.fa24207c.chunk.js",
+    "static/js/2.fa24207c.chunk.js.map": "/delta-world/static/js/2.fa24207c.chunk.js.map",
+    "index.html": "/delta-world/index.html",
+    "static/css/2.0ce74623.chunk.css.map": "/delta-world/static/css/2.0ce74623.chunk.css.map",
+    "static/css/main.9e99a6ea.chunk.css.map": "/delta-world/static/css/main.9e99a6ea.chunk.css.map",
+    "static/js/2.fa24207c.chunk.js.LICENSE.txt": "/delta-world/static/js/2.fa24207c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.01b45ef7.js",
+    "static/css/2.0ce74623.chunk.css",
+    "static/js/2.fa24207c.chunk.js",
+    "static/css/main.9e99a6ea.chunk.css",
+    "static/js/main.9e05c7d5.chunk.js"
+  ]
+}
