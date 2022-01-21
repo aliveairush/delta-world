@@ -52,28 +52,28 @@ a {
 }
 
 .custom-container {
-  padding: 0 15px;
+  padding: 0 1em;
 }
 
-@media (min-width: 575.98px) {
+@media (min-width: $SCREEN_SMALL) {
   .custom-container {
-    padding: 0 calc(50% - 170px);
+    padding: 0 calc(50% - 230px);
   }
 }
 
-@media (min-width: 767.98px) {
+@media (min-width: $SCREEN_MEDIUM) {
   .custom-container {
     padding: 0 calc(50% - 260px);
   }
 }
 
-@media (min-width: 991.98px) {
+@media (min-width: $SCREEN_LARGE) {
   .custom-container {
     padding: 0 calc(50% - 380px);
   }
 }
 
-@media (min-width: 1199.98px) {
+@media (min-width: $SCREEN_EXTRA_LARGE) {
   .custom-container {
     padding: 0 calc(50% - 490px);
   }

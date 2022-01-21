@@ -1,3 +1,35 @@
+@mixin small-rounded-image {
+  width: 50px;
+  border-radius: 25%;
+  border: $border;
+}
+
+@mixin flex-vertically-centered {
+  display: flex;
+  align-items: center;
+}
+
+@mixin on-large-screen-space-between-children($space-between){
+  @media screen and (min-width: $SCREEN_LARGE){
+    & > * + * {
+      margin-left: $space-between;
+    }
+  }
+}
+
+@mixin border-between-children(){
+
+
+}
+
+$SCREEN_EXTRA_LARGE: 1201px; // TV
+$SCREEN_LARGE: 1025px; // Desktops
+$SCREEN_MEDIUM: 769px; // Laptops
+$SCREEN_SMALL: 481px; // Tablets
+$SCREEN_EXTRA_SMALL: 320px; // MOBILE
+
+
+
 $border-color-light: #E7E7E7;
 $border-color-dark: #21262d;
 $border-color: var(--border-color);
@@ -48,7 +80,7 @@ $body-bg-color: var(--body-bg-color);
 }
 
 
-$border-light: 2px solid $border-color;
+$border: 2px solid $border-color;
 $border-radius: 15px;
 $padding: 20px;
 $color-transition: background-color 1s ease, color 1s ease;

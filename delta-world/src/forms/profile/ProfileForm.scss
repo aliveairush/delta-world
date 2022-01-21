@@ -13,7 +13,7 @@
   display: grid;
   grid-template-columns: 1fr 3fr;
   background-color: $primary-bg-color;
-  border: $border-light;
+  border: $border;
   border-radius: $border-radius;
   padding: $padding;
   margin-top: 20px;
@@ -21,7 +21,7 @@
   & img {
     width: 100%;
     border-radius: $border-radius;
-    border: $border-light;
+    border: $border;
   }
 
   &__info {
