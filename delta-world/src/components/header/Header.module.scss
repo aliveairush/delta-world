@@ -19,6 +19,7 @@ $headerHeight: 4rem;
 }
 
 .header {
+  flex: 0 1 auto;
   background-color: $primary-bg-color;
   height: $headerHeight;
   line-height: $headerHeight;
